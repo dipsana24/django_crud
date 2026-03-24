@@ -4,16 +4,19 @@ from .forms import NoteForm
 
 # READ: list all notes
 def note_list(request):
+    """View to list all notes, ordered by newest first."""
     notes = Note.objects.all().order_by('-created_at')
     return render(request, 'notes/note_list.html', {'notes': notes})
 
 # READ: single note detail
 def note_detail(request, pk):
+    """View to show details of a single note."""
     note = get_object_or_404(Note, pk=pk)
     return render(request, 'notes/note_detail.html', {'note': note})
 
 # CREATE
 def note_create(request):
+    """View to create a new note."""
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
