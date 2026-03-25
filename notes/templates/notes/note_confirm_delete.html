@@ -1,24 +1,10 @@
-{% extends 'notes/base.html' %} 
+{% extends 'notes/base.html' %} {% block content %}
+<h2>Delete Note</h2>
+<p>Are you sure you want to delete "<strong>{{ note.title }}</strong>"?</p>
 
-{% block content %}
-<div class="page-header">
-  <a href="{% url 'note_list' %}" class="btn btn-outline">← Back to Notes</a>
-</div>
-
-<div class="card" style="text-align: center; padding: 3rem 2rem; max-width: 600px; margin: 0 auto;">
-  <div style="font-size: 4rem; margin-bottom: 1rem;">⚠️</div>
-  <h2 style="color: var(--danger); margin-bottom: 1rem;">Delete Note?</h2>
-  <p style="margin-bottom: 2rem; font-size: 1.1rem;">
-    Are you sure you want to permanently delete the note 
-    <strong>"{{ note.title }}"</strong>? This action cannot be undone.
-  </p>
-  
-  <form method="POST">
-    {% csrf_token %}
-    <div class="actions" style="justify-content: center;">
-      <a href="{% url 'note_detail' note.pk %}" class="btn btn-outline">Cancel</a>
-      <button type="submit" class="btn btn-danger">Yes, Delete Note</button>
-    </div>
-  </form>
-</div>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Yes, delete</button>
+  <a href="{% url 'note_detail' note.pk %}" class="btn">Cancel</a>
+</form>
 {% endblock %}

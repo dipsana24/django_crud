@@ -1,29 +1,14 @@
-{% extends 'notes/base.html' %} 
+{% extends 'notes/base.html' %} {% block content %} {% for note in notes %}
+<div class="note-card">
+  <h2>
+    <a href="{% url 'note_detail' note.pk %}"> {{ note.title }} </a>
+  </h2>
+  <small>Created: {{ note.created_at }}</small>
+  <p>{{ note.content|truncatechars:150 }}</p>
 
-{% block content %} 
-<div class="page-header">
-  <h2>Your Notes</h2>
-</div>
-
-{% for note in notes %}
-<div class="card note-card">
-  <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">
-    <a href="{% url 'note_detail' note.pk %}" style="color: var(--primary);">{{ note.title }}</a>
-  </h3>
-  <div class="text-muted" style="margin-bottom: 1rem;">🗓️ Created on {{ note.created_at|date:"M d, Y" }}</div>
-  <p style="color: var(--text-main); line-height: 1.6;">{{ note.content|truncatechars:200 }}</p>
-
-  <div class="actions">
-    <a href="{% url 'note_detail' note.pk %}" class="btn btn-outline">Read More</a>
-    <a href="{% url 'note_update' note.pk %}" class="btn btn-primary" style="background-color: #10b981;">Edit</a>
-    <a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">Delete</a>
-  </div>
+  <a href="{% url 'note_update' note.pk %}" class="btn">Edit</a>
+  <a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">Delete</a>
 </div>
 {% empty %}
-<div class="card" style="text-align: center; padding: 3rem 1rem;">
-  <h3 style="color: var(--text-muted); margin-bottom: 1rem;">No notes found</h3>
-  <p style="margin-bottom: 1.5rem;">You haven't created any notes yet.</p>
-  <a href="{% url 'note_create' %}" class="btn btn-primary">+ Create Your First Note</a>
-</div>
-{% endfor %} 
-{% endblock %}
+<p>No notes yet. Click "New Note" to create one.</p>
+{% endfor %} {% endblock %}
