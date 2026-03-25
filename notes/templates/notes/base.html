@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Django Notes CRUD</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+      }
+      a {
+        text-decoration: none;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .btn {
+        padding: 6px 12px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        display: inline-block;
+        margin-right: 8px;
+      }
+      .btn-danger {
+        border-color: darkred;
+        color: darkred;
+      }
+      .note-card {
+        border: 1px solid #ddd;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1><a href="{% url 'note_list' %}">My Notes</a></h1>
+      <a href="{% url 'note_create' %}" class="btn">+ New Note</a>
+    </div>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

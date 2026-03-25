@@ -1,0 +1,14 @@
+{% extends 'notes/base.html' %} {% block content %} {% for note in notes %}
+<div class="note-card">
+  <h2>
+    <a href="{% url 'note_detail' note.pk %}"> {{ note.title }} </a>
+  </h2>
+  <small>Created: {{ note.created_at }}</small>
+  <p>{{ note.content|truncatechars:150 }}</p>
+
+  <a href="{% url 'note_update' note.pk %}" class="btn">Edit</a>
+  <a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">Delete</a>
+</div>
+{% empty %}
+<p>No notes yet. Click "New Note" to create one.</p>
+{% endfor %} {% endblock %}
