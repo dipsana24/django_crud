@@ -3,47 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awesome Django Notes</title>
+    <title>Awesome Notes</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+        --danger: #ef4444;
+        --danger-hover: #dc2626;
+        --text-main: #1f2937;
+        --text-muted: #6b7280;
+        --bg-body: #f3f4f6;
+        --bg-card: #ffffff;
+        --border-radius: 12px;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --transition: all 0.3s ease;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
       body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 40px auto;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
       }
       a {
         text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
       }
-      .header {
+      .navbar {
+        background-color: var(--bg-card);
+        padding: 1rem 2rem;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+      }
+      .navbar h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
       }
       .btn {
-        padding: 6px 12px;
-        border: 1px solid #333;
-        border-radius: 4px;
-        display: inline-block;
-        margin-right: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 1.2rem;
+        font-weight: 500;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+        font-size: 0.95rem;
+      }
+      .btn-primary {
+        background-color: var(--primary);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
       }
       .btn-danger {
-        border-color: darkred;
-        color: darkred;
+        background-color: var(--danger);
+        color: #fff;
       }
-      .note-card {
-        border: 1px solid #ddd;
-        padding: 12px;
-        margin-bottom: 10px;
-        border-radius: 4px;
+      .btn-danger:hover {
+        background-color: var(--danger-hover);
+        transform: translateY(-2px);
+      }
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid #d1d5db;
+        color: var(--text-main);
+      }
+      .btn-outline:hover {
+        background-color: #f9fafb;
+      }
+      .card {
+        background: var(--bg-card);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+      }
+      .card:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transform: translateY(-3px);
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-main);
+      }
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
+      /* Title layout utilities */
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .text-muted {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+      .actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
       }
     </style>
   </head>
   <body>
-    <div class="header">
-      <h1><a href="{% url 'note_list' %}">My Notes</a></h1>
-      <a href="{% url 'note_create' %}" class="btn">+ New Note</a>
-    </div>
+    <nav class="navbar">
+      <a href="{% url 'note_list' %}"><h1>Awesome Notes</h1></a>
+      <a href="{% url 'note_create' %}" class="btn btn-primary">+ Create Note</a>
+    </nav>
 
-    {% block content %}{% endblock %}
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
   </body>
 </html>

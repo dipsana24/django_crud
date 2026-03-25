@@ -1,8 +1,20 @@
-{% extends 'notes/base.html' %} {% block content %}
-<h2>{{ note.title }}</h2>
-<small>Created: {{ note.created_at }}</small>
-<p>{{ note.content }}</p>
+{% extends 'notes/base.html' %} 
 
-<a href="{% url 'note_update' note.pk %}" class="btn">Edit</a>
-<a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">Delete</a>
+{% block content %}
+<div class="page-header">
+  <a href="{% url 'note_list' %}" class="btn btn-outline">← Back to Notes</a>
+  <div class="actions" style="margin-top: 0;">
+    <a href="{% url 'note_update' note.pk %}" class="btn btn-primary" style="background-color: #10b981;">Edit Note</a>
+    <a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">Delete Note</a>
+  </div>
+</div>
+
+<div class="card" style="padding: 2.5rem;">
+  <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);">{{ note.title }}</h2>
+  <div class="text-muted" style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb;">
+    🗓️ Created on {{ note.created_at|date:"F j, Y, g:i a" }}
+  </div>
+  
+  <div style="font-size: 1.1rem; white-space: pre-wrap; line-height: 1.8;">{{ note.content }}</div>
+</div>
 {% endblock %}
